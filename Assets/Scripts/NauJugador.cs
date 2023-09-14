@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class NauJugador : MonoBehaviour
@@ -17,11 +19,13 @@ public class NauJugador : MonoBehaviour
     {
         float direccioHoritzontal = Input.GetAxisRaw("Horizontal");
         //Debug.Log("direccioHoritzontal=" + direccioHoritzontal);
-
-        Vector2 direccioIndicada = new Vector2(direccioHoritzontal, 0f);
-
+        float direccioVertical = Input.GetAxisRaw("Vertical");
+        Vector2 direccioIndicada = new Vector2(direccioHoritzontal, direccioVertical);
+        Vector2 Limit = new Vector2(direccioHoritzontal,direccioVertical);
         Vector2 novaPos = transform.position; // Ens retorna la posicion actual de la nau.
         novaPos += direccioIndicada * _velNau * Time.deltaTime;
+        Mathf.Clamp(novaPos.x,11,-11);
+        Mathf.Clamp(novaPos.y, 5, -5);
 
         transform.position = novaPos;
     }
