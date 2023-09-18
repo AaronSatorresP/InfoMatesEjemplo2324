@@ -52,6 +52,8 @@ public class NauJugador : MonoBehaviour
     private void shoot()
     {
         GameObject bala = Instantiate(Resources.Load("Prefabs/Bala") as GameObject);//indicamos de que tipo es el objeto
+        Vector2 newPos = transform.position;
+        newPos.x = newPos.x + 2f;
         bala.transform.position = this.transform.position;
     }
 }
