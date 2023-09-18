@@ -20,12 +20,25 @@ public class NauJugador : MonoBehaviour
         float direccioHoritzontal = Input.GetAxisRaw("Horizontal");
         //Debug.Log("direccioHoritzontal=" + direccioHoritzontal);
         float direccioVertical = Input.GetAxisRaw("Vertical");
-        Vector2 direccioIndicada = new Vector2(direccioHoritzontal, direccioVertical);
-        Vector2 Limit = new Vector2(direccioHoritzontal,direccioVertical);
+        Vector2 direccioIndicada = new Vector2(direccioHoritzontal, direccioVertical).normalized;
+       
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();//tenemos toda la informacion del componente
+        float anchura = spriteRenderer.bounds.size.x / 2;
+        float Altura = spriteRenderer.bounds.size.y / 2;
+
+        float limitEsquerraX = -Camera.main.orthographicSize * Camera.main.aspect + anchura;//el aspect se utiliza solamente para la anchura
+        float limitDretaX = Camera.main.orthographicSize * Camera.main.aspect - anchura;
+
+        float limitAbajoY = -Camera.main.orthographicSize + Altura;
+        float limitArribaY = Camera.main.orthographicSize - Altura;
+
         Vector2 novaPos = transform.position; // Ens retorna la posicion actual de la nau.
         novaPos += direccioIndicada * _velNau * Time.deltaTime;
-        Mathf.Clamp(novaPos.x,11,-11);
-        Mathf.Clamp(novaPos.y, 5, -5);
+
+
+        //Para ponerlimites  y clamp pones el valor que quieras para poner los limites
+        novaPos.x = Mathf.Clamp(novaPos.x, limitEsquerraX, limitDretaX);
+        novaPos.y = Mathf.Clamp(novaPos.y, limitAbajoY, limitArribaY);
 
         transform.position = novaPos;
     }
