@@ -11,17 +11,24 @@ public class NauJugador : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _velNau = 5f;
+        _velNau = 7f;
     }
 
     // Update is called once per frame
     void Update()
     {
+        MovimentNau();
+
+        DispararBala();
+       
+    }
+    private void MovimentNau()
+    {
         float direccioHoritzontal = Input.GetAxisRaw("Horizontal");
         //Debug.Log("direccioHoritzontal=" + direccioHoritzontal);
         float direccioVertical = Input.GetAxisRaw("Vertical");
-        Vector2 direccioIndicada = new Vector2(direccioHoritzontal, direccioVertical).normalized;
-       
+        Vector2 direccioIndicada = new Vector2(direccioHoritzontal, direccioVertical).normalized;//mover la nave
+
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();//tenemos toda la informacion del componente
         float anchura = spriteRenderer.bounds.size.x / 2;
         float Altura = spriteRenderer.bounds.size.y / 2;
@@ -40,20 +47,21 @@ public class NauJugador : MonoBehaviour
         novaPos.x = Mathf.Clamp(novaPos.x, limitEsquerraX, limitDretaX);
         novaPos.y = Mathf.Clamp(novaPos.y, limitAbajoY, limitArribaY);
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            //Dispara
-            shoot();
-        }
+
 
         transform.position = novaPos;
     }
-
-    private void shoot()
+    private void DispararBala()
     {
-        GameObject bala = Instantiate(Resources.Load("Prefabs/Bala") as GameObject);//indicamos de que tipo es el objeto
-        Vector2 newPos = transform.position;
-        newPos.x = newPos.x + 2f;
-        bala.transform.position = this.transform.position;
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            //Dispara
+            GameObject bala = Instantiate(Resources.Load("Prefabs/Bala") as GameObject);//indicamos de que tipo es el objeto
+            Vector2 newPos = transform.position;
+            newPos.x = newPos.x + 2f;
+            bala.transform.position = this.transform.position;
+        }
     }
+
+ 
 }
