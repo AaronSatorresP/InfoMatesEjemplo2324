@@ -10,7 +10,7 @@ public class Numero : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _vel = 2f;
+        _vel = 5f;
 
         //cargamos una imagen de numero aleatorio.
         System.Random aleatori = new System.Random();
@@ -36,6 +36,10 @@ public class Numero : MonoBehaviour
     {
         if(objetotocado.tag == "Bala" || objetotocado.tag == "NauJugador")
         {
+            if(objetotocado.tag == "Bala")
+            {
+                GameObject.Find("NumText").GetComponent<NumText>().AfegirNum(_valorNumero);
+            }
             Destroy(gameObject);
         }
     }
@@ -45,7 +49,7 @@ public class Numero : MonoBehaviour
         Vector2 costatInferiorEsquerra = Camera.main.ViewportToWorldPoint(new Vector2(0,0));
         if(transform.position.y <= costatInferiorEsquerra.y)
         {
-            Destroy(gameObject);
+                Destroy(gameObject);
         }
     }
 }

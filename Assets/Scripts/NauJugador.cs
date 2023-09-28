@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using UnityEditor.Build.Content;
 using UnityEngine;
 
 public class NauJugador : MonoBehaviour
@@ -32,8 +33,10 @@ public class NauJugador : MonoBehaviour
         {
             GameObject explosio = Instantiate(_PrefabExplosio);//hacemos que cuando la nave se destruye sale una explosio
             explosio.transform.position = transform.position;
-            Destroy(gameObject);
-            
+            //Destroy(gameObject);
+            GameObject.Find("GameManagerObj").GetComponent<GameManager>().SetEstatGameManager(GameManager.EstatsGameManager.GameOver);
+
+
         }
     }
     private void MovimentNau()

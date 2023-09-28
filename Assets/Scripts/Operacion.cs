@@ -10,7 +10,7 @@ public class GeneradorOperacions : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _velo = 2f;
+        _velo = 5f;
         //cargamos una imagen de numero aleatorio.
         System.Random aleatori = new System.Random();
         _valorOperacion = aleatori.Next(0, 5);//Aleatorio entre 0 y 4.
@@ -40,6 +40,28 @@ public class GeneradorOperacions : MonoBehaviour
     {
         if (objetotocado.tag == "Bala" || objetotocado.tag == "NauJugador")
         {
+            if (objetotocado.tag == "Bala")
+            {
+                switch (_valorOperacion) 
+                { 
+                    case 0:
+
+                        break; 
+                    case 1:
+
+                        break;
+                    case 2:
+                        break;
+
+                    case 3:
+                        break; 
+
+                    case 4:
+                        break;
+
+                }
+                GameObject.Find("NumText").GetComponent<NumText>().AfegirOp(_valorOperacion);
+            }
             Destroy(gameObject);
         }
     }

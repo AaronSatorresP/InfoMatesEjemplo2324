@@ -5,10 +5,19 @@ using UnityEngine;
 public class GeneradorOperacion : MonoBehaviour
 {
     public GameObject _PrefabOperacions;
+
+    public void IniciaGeneracioOps()
+    {
+        InvokeRepeating("GenerarOperacion", 1f, 3f);//Nos gerena el primer objeto 1s y luego saldra cada 3s
+    }
+    public void AturaGeneracioOps()
+    {
+        CancelInvoke("GenerarOperacion");
+    }
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("GenerarOperacion", 1f, 3f);//Nos gerena el primer objeto 1s y luego saldra cada 3s
+        
     }
 
     // Update is called once per frame
