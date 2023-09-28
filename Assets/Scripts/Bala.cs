@@ -27,4 +27,13 @@ public class Bala : MonoBehaviour
         }
    
     }
+    private void OnTriggerEnter2D(Collider2D objetotocado)
+    {
+        if (objetotocado.tag == "Numero")
+        {
+            Debug.Log("Numero tocado");
+            Destroy(gameObject);
+            
+        }
+    }
 }

@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,11 +8,12 @@ using UnityEngine;
 public class NauJugador : MonoBehaviour
 {
     public float _velNau;
-
+    public GameObject _PrefabExplosio;
     // Start is called before the first frame update
     void Start()
     {
         _velNau = 7f;
+        
     }
 
     // Update is called once per frame
@@ -21,6 +23,18 @@ public class NauJugador : MonoBehaviour
 
         DispararBala();
        
+    }
+    private void OnTriggerEnter2D(Collider2D objecteTocat)
+    {
+        // cuando la nave toque un objeto automaticamente se llamara este metodo
+        // El valor del objeto tocado sera el objeto que hemos tocado
+        if (objecteTocat.tag == "Numero" || objecteTocat.tag =="Operacion") 
+        {
+            GameObject explosio = Instantiate(_PrefabExplosio);//hacemos que cuando la nave se destruye sale una explosio
+            explosio.transform.position = transform.position;
+            Destroy(gameObject);
+            
+        }
     }
     private void MovimentNau()
     {
